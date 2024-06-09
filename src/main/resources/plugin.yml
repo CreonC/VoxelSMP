@@ -6,7 +6,18 @@ load: STARTUP
 author: CreonC
 description: VoxelSMP's core plugin
 
+permissions:
+  voxelsmp.admin:
+    description: Allows the player to use all admin commands
+    default: op
+
 commands:
   settings:
     description: Opens the settings menu
     usage: /settings
+  graceperiod:
+    description: Sets the grace period
+    usage: /graceperiod
+    aliases: gp
+    permission: voxelsmp.admin
+    permission-message: "You do not have permission to use this command"
