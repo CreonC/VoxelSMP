@@ -1,18 +1,21 @@
 package me.creonc.voxelsmp;
 
 import me.creonc.voxelsmp.commands.GracePeriodCommand;
+import me.creonc.voxelsmp.tabcomplete.AutoComplete;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import me.creonc.voxelsmp.commands.Settings;
 import me.creonc.voxelsmp.events.HandlePlayerHit;
 import org.bukkit.scheduler.BukkitTask;
 
-import java.util.BitSet;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 public final class VoxelSMP extends JavaPlugin {
     long gracePeriodExpiration = 0;
@@ -23,24 +26,32 @@ public final class VoxelSMP extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        long StartupTime = System.currentTimeMillis();
         // Plugin startup logic
         Bukkit.getLogger().info("Starting VoxelSMP core");
         getConfig().options().copyDefaults(true);
         this.saveConfig();
         Settings settings = new Settings();
+        Logger pluginLogger = getLogger();
 
         try {
-            Bukkit.getLogger().info("Loading VoxelSMP commands");
+            pluginLogger.info("Loading VoxelSMP commands");
             this.getCommand("settings").setExecutor(settings);
             GracePeriodCommand command = new GracePeriodCommand(this);
-            getCommand("graceperiod").setExecutor(command);
-            Bukkit.getLogger().info("VoxelSMP commands loaded successfully");
-            Bukkit.getLogger().info("Loading VoxelSMP events");
+            PluginCommand gpCommand = getCommand("graceperiod");
+            gpCommand.setExecutor(command);
+            pluginLogger.info("VoxelSMP commands loaded successfully");
+            pluginLogger.info("Loading VoxelSMP tab completions");
+            AutoComplete tabCompleter = new AutoComplete();
+            gpCommand.setTabCompleter(tabCompleter);
+            pluginLogger.info("VoxelSMP tab completions loaded successfully");
+            pluginLogger.info("Loading VoxelSMP events");
             getServer().getPluginManager().registerEvents(new HandlePlayerHit(this), this);
-            Bukkit.getLogger().info("VoxelSMP events loaded successfully");
+            pluginLogger.info("VoxelSMP events loaded successfully");
+            pluginLogger.info("VoxelSMP core started successfully in " + (System.currentTimeMillis() - StartupTime) + "ms");
         }
         catch (NullPointerException e) {
-            Bukkit.getLogger().severe("Failed to initialize VoxelSMP Core. Reason: " + e.getCause());
+            pluginLogger.severe("Failed to initialize VoxelSMP Core. Reason: " + e.getCause());
         }
 
 
@@ -51,7 +62,9 @@ public final class VoxelSMP extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
         gracePeriodBossBar.setVisible(false);
-        gracePeriodUpdateTask.cancel();
+        if (gracePeriodUpdateTask != null) {
+            gracePeriodUpdateTask.cancel();
+        }
         Bukkit.getLogger().info("Stopping VoxelSMP core");
         saveConfig();
     }
@@ -73,9 +86,9 @@ public final class VoxelSMP extends JavaPlugin {
             gracePeriodBossBar.setTitle("Grace Period: " + formatTime(remaining));
             gracePeriodBossBar.setVisible(true);
             gracePeriodActive = true;
-            if (progress < 0.3) {
+            if (progress < 0.15) {
                 gracePeriodBossBar.setColor(BarColor.RED);
-            } else if (progress < 0.6) {
+            } else if (progress < 0.5) {
                 gracePeriodBossBar.setColor(BarColor.YELLOW);
             } else {
                 gracePeriodBossBar.setColor(BarColor.GREEN);
@@ -93,6 +106,8 @@ public final class VoxelSMP extends JavaPlugin {
             }, 100L); // Hide boss bar after 5 seconds (100 ticks
             gracePeriodUpdateTask.cancel();
             gracePeriodActive = false;
+            String message = "§l§cGrace period has expired.";
+            Bukkit.broadcastMessage(message);
         }
     }
 

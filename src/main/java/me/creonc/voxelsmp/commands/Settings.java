@@ -10,16 +10,10 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import java.util.Arrays;
-
-
-
 
 public class Settings implements CommandExecutor {
     int invSize = 27;
     //register /settings
-    @Nonnull
     public boolean onCommand(@NotNull CommandSender sender, Command command, @NotNull String label, String[] args) {
 
         if (!command.getName().equals("settings")) {

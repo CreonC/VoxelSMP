@@ -37,6 +37,11 @@ public class GracePeriodCommand implements CommandExecutor {
                 plugin.setGracePeriod(duration);
                 sender.sendMessage(ChatColor.GREEN + "[VoxelSMP] Global grace period set for " + time + " " + unit + ".");
                 sender.sendMessage(ChatColor.GREEN + "[VoxelSMP] Global grace period active.");
+                if (plugin.gracePeriodActive) {
+                    plugin.gracePeriodUpdateTask.cancel();
+                    plugin.hideGracePeriodBossBar();
+                }
+                plugin.gracePeriodActive = true;
                 plugin.initGracePeriodBossBar();
                 plugin.showGracePeriodBossBar();
                 break;
@@ -56,8 +61,14 @@ public class GracePeriodCommand implements CommandExecutor {
                 sender.sendMessage(ChatColor.GREEN + "[VoxelSMP] The grace period has been removed.");
                 plugin.hideGracePeriodBossBar();
                 plugin.gracePeriodUpdateTask.cancel();
+                plugin.gracePeriodActive = false;
                 break;
             case "query":
+                if (plugin.getGracePeriodRemaining() <= 0) {
+                    sender.sendMessage(ChatColor.RED + "[VoxelSMP] There is no active grace period.");
+                    return true;
+                }
+
                 sender.sendMessage(ChatColor.GREEN + "[VoxelSMP] The grace period will expire in " + plugin.formatTime(plugin.getGracePeriodRemaining()) + ".");
                 break;
 
