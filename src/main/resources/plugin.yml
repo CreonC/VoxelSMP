@@ -21,3 +21,8 @@ commands:
     aliases: gp
     permission: voxelsmp.admin
     permission-message: "You do not have permission to use this command"
+  autorestart:
+    description: Sets the autorestart time
+    usage: /autorestart
+    permission: voxelsmp.admin
+    permission-message: "You do not have permission to use this command"
