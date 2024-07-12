@@ -26,10 +26,7 @@ public final class VoxelSMP extends JavaPlugin {
     long gracePeriodDuration = 0;
     public boolean gracePeriodActive = false;
 
-    private BossBar AutoRestartBossBar;
-    public BukkitTask AutoRestartUpdateTask;
-    long AutoRestartDuration = 0;
-    public boolean AutoRestartActive = false;
+
 
     @Override
     public void onEnable() {
@@ -52,7 +49,7 @@ public final class VoxelSMP extends JavaPlugin {
             gpCommand.setExecutor(command);
             // AutoRestart
 
-            GracePeriodCommand ar = new GracePeriodCommand(this);
+            AutoRestart ar = new AutoRestart(this);
             PluginCommand autoRestart = getCommand("autorestart");
             autoRestart.setExecutor(ar);
 
@@ -93,31 +90,8 @@ public final class VoxelSMP extends JavaPlugin {
         gracePeriodUpdateTask = Bukkit.getScheduler().runTaskTimer(this, this::updateGracePeriodBossBar, 0L, 10L); // Update every 0.5 seconds
     }
 
-    public void initAutoRestartBossBar() {
-        Bukkit.getLogger().info("[VOXELSMP-Debug] Initializing AutoRestart Boss Bar (CreatingBossBar)");
-        AutoRestartBossBar = Bukkit.createBossBar("AutoRestart: 0s", BarColor.RED, BarStyle.SOLID);
-        AutoRestartBossBar.setVisible(true);
 
-        AutoRestartUpdateTask = Bukkit.getScheduler().runTaskTimer(this, this::updateAutoRestartBossBar, 0L, 10L); // Update every 0.5 seconds
-    }
 
-    private void updateAutoRestartBossBar() {
-        long remaining = getAutoRestartDurationRemaining();
-        if (remaining > 0) {
-            double progress = (double) remaining / AutoRestartDuration;
-            AutoRestartBossBar.setProgress(progress);
-            AutoRestartBossBar.setTitle("Restart: " + formatTime(remaining));
-            AutoRestartBossBar.setVisible(true);
-            AutoRestartActive = true;
-            if (progress < 0.15) {
-                AutoRestartBossBar.setColor(BarColor.RED);
-            } else if (progress < 0.5) {
-                AutoRestartBossBar.setColor(BarColor.YELLOW);
-            } else {
-                AutoRestartBossBar.setColor(BarColor.GREEN);
-            }
-        }
-    }
 
 
     private void updateGracePeriodBossBar() {
@@ -161,10 +135,6 @@ public final class VoxelSMP extends JavaPlugin {
         gracePeriodBossBar.setVisible(false);
     }
 
-    public void showAutoRestartBossBar() {
-        AutoRestartBossBar.setVisible(true);
-    }
-
 
 
     public void setGracePeriod(long duration) {
@@ -176,9 +146,6 @@ public final class VoxelSMP extends JavaPlugin {
         return gracePeriodExpiration - System.currentTimeMillis();
     }
 
-    public long getAutoRestartDurationRemaining() {
-        return AutoRestartDuration - System.currentTimeMillis();
-    }
 
     public String formatTime(long millis) {
         long seconds = TimeUnit.MILLISECONDS.toSeconds(millis);

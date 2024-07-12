@@ -5,10 +5,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.NotNull;
 
 public class AutoRestart implements CommandExecutor {
     private final VoxelSMP plugin;
+    private BukkitTask restartTask;
 
     public AutoRestart(VoxelSMP plugin) {
         this.plugin = plugin;
@@ -19,30 +21,33 @@ public class AutoRestart implements CommandExecutor {
         if (strings.length > 0) {
             String timeArg = strings[0];
             try {
-                // Assuming the format is always like "60s"
                 int seconds = Integer.parseInt(timeArg.substring(0, timeArg.length() - 1));
-                int ticks = seconds * 20; // Convert seconds to ticks
-
-                Bukkit.getScheduler().runTaskLater(plugin, () -> {
-                    // Simulate server restart by broadcasting a message
-                    // Actual restart logic depends on your server setup
-                    Bukkit.broadcastMessage("Server is restarting...");
-                    // Insert actual restart logic here
-                }, ticks);
-
-                commandSender.sendMessage("broadcasting message Server will restart in " + seconds + " seconds.");
-                Bukkit.broadcastMessage("§l§cServer will restart in " + seconds + " seconds.");
-
-                plugin.AutoRestartActive = true;
-                plugin.initAutoRestartBossBar();
-                plugin.showAutoRestartBossBar();
+                commandSender.sendMessage("Server will restart in " + seconds + " seconds.");
+                scheduleRestart(seconds);
+                return true;
             } catch (NumberFormatException e) {
                 commandSender.sendMessage("Invalid time format. Please use the format like '60s'.");
+                return false;
             }
-            return true;
         } else {
             commandSender.sendMessage("Please specify the restart time. Example: /autorestart 60s");
             return false;
         }
+    }
+
+    private void scheduleRestart(int seconds) {
+        final int[] remainingSeconds = {seconds};
+        restartTask = Bukkit.getScheduler().runTaskTimer(plugin, () -> {
+            if (remainingSeconds[0] > 0) {
+                if (remainingSeconds[0] <= 10 || remainingSeconds[0] % 10 == 0) {
+                    Bukkit.broadcastMessage("§l§cServer will restart in " + remainingSeconds[0] + " seconds.");
+                }
+                remainingSeconds[0]--;
+            } else {
+                Bukkit.broadcastMessage("§l§cServer is restarting...");
+                Bukkit.getServer().shutdown();
+                restartTask.cancel();
+            }
+        }, 0L, 20L); // Schedule to run every second (20 ticks)
     }
 }
