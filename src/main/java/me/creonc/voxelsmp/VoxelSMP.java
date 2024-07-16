@@ -1,6 +1,7 @@
 package me.creonc.voxelsmp;
 
 import me.creonc.voxelsmp.commands.AutoRestart;
+import me.creonc.voxelsmp.commands.DeferRestart;
 import me.creonc.voxelsmp.commands.GracePeriodCommand;
 import me.creonc.voxelsmp.tabcomplete.AutoComplete;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -48,10 +49,13 @@ public final class VoxelSMP extends JavaPlugin {
             PluginCommand gpCommand = getCommand("graceperiod");
             gpCommand.setExecutor(command);
             // AutoRestart
-
             AutoRestart ar = new AutoRestart(this);
             PluginCommand autoRestart = getCommand("autorestart");
             autoRestart.setExecutor(ar);
+            // DeferRestart
+            DeferRestart dr = new DeferRestart(this);
+            PluginCommand deferRestart = getCommand("deferrestart");
+            deferRestart.setExecutor(dr);
 
             pluginLogger.info("VoxelSMP commands loaded successfully");
             pluginLogger.info("Loading VoxelSMP tab completions");
@@ -59,6 +63,7 @@ public final class VoxelSMP extends JavaPlugin {
             gpCommand.setTabCompleter(tabCompleter);
             pluginLogger.info("VoxelSMP tab completions loaded successfully");
             pluginLogger.info("Loading VoxelSMP events");
+            // Hits
             getServer().getPluginManager().registerEvents(new HandlePlayerHit(this), this);
             pluginLogger.info("VoxelSMP events loaded successfully");
             pluginLogger.info("VoxelSMP core started successfully in " + (System.currentTimeMillis() - StartupTime) + "ms");

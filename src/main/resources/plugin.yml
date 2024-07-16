@@ -26,3 +26,8 @@ commands:
     usage: /autorestart
     permission: voxelsmp.admin
     permission-message: "You do not have permission to use this command"
+  deferrestart:
+    description: Defers the restart
+    usage: /deferrestart
+    permission: voxelsmp.admin
+    permission-message: "You do not have permission to use this command"
