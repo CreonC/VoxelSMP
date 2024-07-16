@@ -11,6 +11,7 @@ There's no docs because it's for the smp's internal use, however here are the co
 - `/settings` - Opens the settings menu (Does not work, allowing players to dupe glass lmao)
 - `/graceperiod <time> (/gp <time>)` - Sets the grace period for the smp
 - `/autorestart <time>` - Sets the time for the server to restart
+- `/deferrestart` - Defers the restart until everyone has left the server
 
 ## Can I join the smp?
 
