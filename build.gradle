@@ -3,13 +3,12 @@ plugins {
 }
 
 group = 'me.creonc'
-version = '1.1-Production (2024.7.16)'
+version = '1.2.1-Production (2024.7.19)'
 
 repositories {
     mavenCentral()
-    maven {
-        name = "spigotmc-repo"
-        url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
+    maven{
+        url = "https://repo.papermc.io/repository/maven-public/"
     }
     maven {
         name = "sonatype"
@@ -17,11 +16,17 @@ repositories {
     }
 
     maven { url 'https://repo.codemc.io/repository/maven-releases/' }
+    maven { url 'https://repo.destial.xyz/repository/maven-releases/'}
+
+    maven {
+        name = "labymod"
+        url = "https://dist.labymod.net/api/v1/maven/release/"
+    }
 }
 
 dependencies {
-    compileOnly "org.spigotmc:spigot-api:1.20.6-R0.1-SNAPSHOT"
-    compileOnly 'com.github.retrooper.packetevents:spigot:2.3.0'
+    compileOnly("io.papermc.paper:paper-api:1.21-R0.1-SNAPSHOT")
+    compileOnly("net.labymod.serverapi:server-bukkit:1.0.1")
 }
 
 def targetJavaVersion = 21

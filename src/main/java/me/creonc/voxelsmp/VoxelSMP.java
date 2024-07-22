@@ -1,8 +1,10 @@
 package me.creonc.voxelsmp;
 
+
 import me.creonc.voxelsmp.commands.AutoRestart;
 import me.creonc.voxelsmp.commands.DeferRestart;
 import me.creonc.voxelsmp.commands.GracePeriodCommand;
+import me.creonc.voxelsmp.events.BanFeather;
 import me.creonc.voxelsmp.tabcomplete.AutoComplete;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
@@ -65,6 +67,8 @@ public final class VoxelSMP extends JavaPlugin {
             pluginLogger.info("Loading VoxelSMP events");
             // Hits
             getServer().getPluginManager().registerEvents(new HandlePlayerHit(this), this);
+            // Ban Feather
+            getServer().getPluginManager().registerEvents(new BanFeather(), this);
             pluginLogger.info("VoxelSMP events loaded successfully");
             pluginLogger.info("VoxelSMP core started successfully in " + (System.currentTimeMillis() - StartupTime) + "ms");
         }
