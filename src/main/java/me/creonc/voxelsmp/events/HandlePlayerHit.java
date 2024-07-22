@@ -22,7 +22,7 @@ public class HandlePlayerHit implements Listener {
             if (event.getEntity() instanceof Player) {
                 Entity attacker = event.getDamager();
                 if (attacker instanceof Player) {
-                    attacker.sendMessage(ChatColor.RED + "You cannot attack players during the grace period.");
+                    attacker.sendMessage(ChatColor.RED + "You cannot attack players during grace period.");
                     event.setCancelled(true);
                 }
             }
