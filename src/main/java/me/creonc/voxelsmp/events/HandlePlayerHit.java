@@ -2,6 +2,7 @@ package me.creonc.voxelsmp.events;
 
 import me.creonc.voxelsmp.VoxelSMP;
 import org.bukkit.Bukkit;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -22,7 +23,7 @@ public class HandlePlayerHit implements Listener {
             if (event.getEntity() instanceof Player) {
                 Entity attacker = event.getDamager();
                 if (attacker instanceof Player) {
-                    attacker.sendMessage(ChatColor.RED + "You cannot attack players during grace period.");
+                    attacker.sendMessage(TextColor.color(255,0,0) + "You cannot attack players during grace period.");
                     event.setCancelled(true);
                 }
             }
