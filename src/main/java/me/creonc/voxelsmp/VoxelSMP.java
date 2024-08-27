@@ -93,7 +93,9 @@ public final class VoxelSMP extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-        gracePeriodBossBar.setVisible(false); //FIXME: Error when shutting down
+        if (gracePeriodActive) {
+            gracePeriodBossBar.setVisible(false);
+        }
         if (gracePeriodUpdateTask != null) {
             gracePeriodUpdateTask.cancel();
         }
