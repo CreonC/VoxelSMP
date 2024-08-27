@@ -33,12 +33,13 @@ public final class VoxelSMP extends JavaPlugin {
     @Override
     public void onEnable() {
         long StartupTime = System.currentTimeMillis();
+        Logger pluginLogger = getLogger();
         // Plugin startup logic
-        Bukkit.getLogger().info("Starting VoxelSMP core");
+        pluginLogger.info("Starting VoxelSMP core");
         getConfig().options().copyDefaults(true);
         this.saveConfig();
         Settings settings = new Settings();
-        Logger pluginLogger = getLogger();
+
 
         try {
             pluginLogger.info("Loading VoxelSMP commands");
