@@ -31,8 +31,8 @@ commands:
     usage: /deferrestart
     permission: voxelsmp.admin
     permission-message: "You do not have permission to use this command"
-  noNether:
-    description: idks the nether
-    usage: /noNether
+  worldcontrol:
+    description: toggles nether and end portal
+    usage: /worldcontrol
     permission: voxelsmp.admin
     permission-message: "You do not have permission to use this command"

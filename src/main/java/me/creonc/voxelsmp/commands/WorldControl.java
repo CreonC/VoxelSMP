@@ -11,18 +11,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerTeleportEvent;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashSet;
-import java.util.Set;
-
-public class NoNether implements CommandExecutor, Listener {
+public class WorldControl implements CommandExecutor, Listener {
     private final VoxelSMP plugin;
     private boolean allowNether = true;  // Global setting for Nether access
     private boolean allowEnd = true;      // Global setting for End access
 
-    public NoNether(VoxelSMP plugin) {
+    public WorldControl(VoxelSMP plugin) {
         this.plugin = plugin;
         Bukkit.getPluginManager().registerEvents(this, plugin);
     }
@@ -37,7 +33,7 @@ public class NoNether implements CommandExecutor, Listener {
         Player player = (Player) commandSender;
 
         if (args.length < 1) {
-            player.sendMessage(ChatColor.RED + "Usage: /nonether <enablenether | disablenether | enableend | disableend>");
+            player.sendMessage(ChatColor.RED + "Usage: /worldcontrol <enablenether | disablenether | enableend | disableend>");
             return false; // Not enough arguments
         }
 
@@ -65,7 +61,7 @@ public class NoNether implements CommandExecutor, Listener {
                 return true;
             default:
                 Bukkit.getLogger().info("Debug: Command not recognized.");
-                player.sendMessage(ChatColor.RED + "Usage: /nonether <enablenether | disablenether | enableend | disableend>");
+                player.sendMessage(ChatColor.RED + "Usage: /worldcontrol <enablenether | disablenether | enableend | disableend>");
                 return false; // Command not recognized
         }
     }

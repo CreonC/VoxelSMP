@@ -15,7 +15,7 @@ public class AutoCompleteNether implements TabCompleter {
     @Nullable
     @Override
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if (!command.getName().equalsIgnoreCase("nonether")) {
+        if (!command.getName().equalsIgnoreCase("worldcontrol")) {
             return null;
         }
         List<String> completions = new ArrayList<>();

@@ -6,13 +6,11 @@ import me.creonc.voxelsmp.events.BanFeather;
 import me.creonc.voxelsmp.events.NoGriefDuringGP;
 import me.creonc.voxelsmp.tabcomplete.AutoComplete;
 import me.creonc.voxelsmp.tabcomplete.AutoCompleteNether;
-import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.command.PluginCommand;
-import org.bukkit.entity.Boss;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import me.creonc.voxelsmp.events.HandlePlayerHit;
@@ -57,10 +55,10 @@ public final class VoxelSMP extends JavaPlugin {
             DeferRestart dr = new DeferRestart(this);
             PluginCommand deferRestart = getCommand("deferrestart");
             deferRestart.setExecutor(dr);
-            // NoNether
-            NoNether noNether = new NoNether(this);
-            PluginCommand noNetherCommand = getCommand("noNether");
-            noNetherCommand.setExecutor(noNether);
+            // WorldControl
+            WorldControl worldControl = new WorldControl(this);
+            PluginCommand worldControlCommand = getCommand("worldcontrol");
+            worldControlCommand.setExecutor(worldControl);
 
 
             pluginLogger.info("VoxelSMP commands loaded successfully");
@@ -69,7 +67,7 @@ public final class VoxelSMP extends JavaPlugin {
             gpCommand.setTabCompleter(tabCompleter);
             // noNether
             AutoCompleteNether tabCompleterNether = new AutoCompleteNether();
-            noNetherCommand.setTabCompleter(tabCompleterNether);
+            worldControlCommand.setTabCompleter(tabCompleterNether);
 
             pluginLogger.info("VoxelSMP tab completions loaded successfully");
             pluginLogger.info("Loading VoxelSMP events");
