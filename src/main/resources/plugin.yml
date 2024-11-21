@@ -1,7 +1,7 @@
 name: VoxelSMP
 version: '${version}'
 main: me.creonc.voxelsmp.VoxelSMP
-api-version: '1.20'
+api-version: '1.21'
 load: STARTUP
 author: CreonC
 description: VoxelSMP's core plugin

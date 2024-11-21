@@ -4,6 +4,7 @@ package me.creonc.voxelsmp;
 import me.creonc.voxelsmp.commands.*;
 import me.creonc.voxelsmp.config.ConfigManager;
 import me.creonc.voxelsmp.events.BanFeather;
+import me.creonc.voxelsmp.events.JoinBetaMessage;
 import me.creonc.voxelsmp.events.NoGriefDuringGP;
 import me.creonc.voxelsmp.features.Lifesteal;
 import me.creonc.voxelsmp.tabcomplete.AutoComplete;
@@ -80,6 +81,8 @@ public final class VoxelSMP extends JavaPlugin {
             getServer().getPluginManager().registerEvents(new BanFeather(), this);
             //No grief
             getServer().getPluginManager().registerEvents(new NoGriefDuringGP(this), this);
+            // JoinBetaMessage
+            getServer().getPluginManager().registerEvents(new JoinBetaMessage(this), this);
             pluginLogger.info("VoxelSMP events loaded successfully");
             pluginLogger.info("Loading VoxelSMP features");
             // Lifesteal

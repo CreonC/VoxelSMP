@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'me.creonc'
-version = '4.0.0-Development-Debug (2024.x.x)'
+version = '4.0.1-Production-Debug (2024.11.21)'
 
 repositories {
     mavenCentral()
