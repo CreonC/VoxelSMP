@@ -228,7 +228,6 @@ public class PurgeDay implements Listener {
             event.getPlayer().sendMessage("§cLifesteal is enabled - Be careful!");
             event.getPlayer().sendMessage("§cPurge ends at " + formatDateTime(nextPurgeEnd));
         } else {
-            event.getPlayer().sendMessage("§aThe server is peaceful.");
             event.getPlayer().sendMessage("§aNext purge starts on " + formatDateTime(nextPurgeStart));
             event.getPlayer().sendMessage("§aand ends on " + formatDateTime(nextPurgeEnd));
         }
@@ -251,7 +250,6 @@ public class PurgeDay implements Listener {
         Bukkit.broadcastMessage("§a=========================");
         Bukkit.broadcastMessage("§2§lTHE PURGE HAS ENDED!");
         Bukkit.broadcastMessage("§aLifesteal is now disabled.");
-        Bukkit.broadcastMessage("§aReturn to your peaceful activities.");
         Bukkit.broadcastMessage("§aNext purge starts " + formatDateTime(nextPurgeStart));
         Bukkit.broadcastMessage("§a=========================");
 
