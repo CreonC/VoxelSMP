@@ -1,8 +1,8 @@
 # VoxelSMP
 
-## What's this
+## Description
 
-Handful of utils for me to use in the smp
+Self explanatory, it's a plugin for the VoxelSMP.
 
 ## How to use this?
 
