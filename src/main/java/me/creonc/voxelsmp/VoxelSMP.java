@@ -7,6 +7,7 @@ import me.creonc.voxelsmp.events.BanFeather;
 import me.creonc.voxelsmp.events.JoinBetaMessage;
 import me.creonc.voxelsmp.events.NoGriefDuringGP;
 import me.creonc.voxelsmp.features.Lifesteal;
+import me.creonc.voxelsmp.features.PurgeDay;
 import me.creonc.voxelsmp.tabcomplete.AutoComplete;
 import me.creonc.voxelsmp.tabcomplete.AutoCompleteNether;
 import github.scarsz.discordsrv.DiscordSRV;
@@ -29,6 +30,7 @@ public final class VoxelSMP extends JavaPlugin {
     public BukkitTask gracePeriodUpdateTask;
     long gracePeriodDuration = 0;
     public boolean gracePeriodActive = false;
+    public Lifesteal lifesteal;
 
 
     @Override
@@ -86,7 +88,16 @@ public final class VoxelSMP extends JavaPlugin {
             pluginLogger.info("VoxelSMP events loaded successfully");
             pluginLogger.info("Loading VoxelSMP features");
             // Lifesteal
-            getServer().getPluginManager().registerEvents(new Lifesteal(this), this);
+            lifesteal = new Lifesteal(this);
+            getServer().getPluginManager().registerEvents(lifesteal, this);
+            // PurgeDay
+            getServer().getPluginManager().registerEvents(new PurgeDay(this, lifesteal), this);
+
+            // setPurgeDay (Command)
+            setPurgeDay setPurgeDay = new setPurgeDay(new PurgeDay(this, lifesteal));
+            PluginCommand setPurgeDayCommand = getCommand("setpurgeday");
+            setPurgeDayCommand.setExecutor(setPurgeDay);
+
             pluginLogger.info("VoxelSMP features loaded successfully");
             pluginLogger.info("VoxelSMP core started successfully in " + (System.currentTimeMillis() - StartupTime) + "ms");
         }
