@@ -12,13 +12,13 @@ public class BanFeather implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         if (player.getClientBrandName().contains("Feather Fabric")) {
-            player.kickPlayer("Feather client is not allowed on this server. Use other clients like Lunar or Badlion.");
+            player.kickPlayer("Feather client is not allowed on this server.");
         } else {
             // Log to console the client brand name of the player if not using Feather Fabric
             Bukkit.getLogger().info("[Voxel-Debug]: " + player.getName() + " is using " + player.getClientBrandName());
 
             if (player.getClientBrandName().contains("Fabric")) { // Fabric can sometimes be used with other mods that creates an unfair advantage
-                player.sendMessage("A reminder that blacklisted modifications that create an unfair advantage are not allowed on this server.");
+                player.sendMessage("Blacklisted modifications that create an unfair advantage are not allowed on this server.");
             }
         }
     }
