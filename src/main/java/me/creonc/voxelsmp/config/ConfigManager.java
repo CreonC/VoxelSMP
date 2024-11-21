@@ -33,6 +33,8 @@ public class ConfigManager {
         config.addDefault("discord.token", "your-token-here");
         config.addDefault("discord.enabled", true);
         config.addDefault("discord.channel-id", 0L);
+        config.addDefault("purgeday.baseurl", "http://localhost");
+        config.addDefault("purgeday.port", 8080);
         config.options().copyDefaults(true);
 
         saveConfig();
@@ -80,5 +82,13 @@ public class ConfigManager {
     public void setChannelId(long channelId) {
         config.set("discord.channel-id", channelId);
         saveConfig();
+    }
+
+    public String getPurgeBaseUrl() {
+        return config.getString("purgeday.baseurl");
+    }
+
+    public int getPurgePort() {
+        return config.getInt("purgeday.port");
     }
 }
