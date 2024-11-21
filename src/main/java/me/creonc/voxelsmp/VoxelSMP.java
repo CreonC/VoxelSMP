@@ -8,6 +8,7 @@ import me.creonc.voxelsmp.events.NoGriefDuringGP;
 import me.creonc.voxelsmp.features.Lifesteal;
 import me.creonc.voxelsmp.tabcomplete.AutoComplete;
 import me.creonc.voxelsmp.tabcomplete.AutoCompleteNether;
+import github.scarsz.discordsrv.DiscordSRV;
 import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
@@ -28,6 +29,7 @@ public final class VoxelSMP extends JavaPlugin {
     long gracePeriodDuration = 0;
     public boolean gracePeriodActive = false;
 
+
     @Override
     public void onEnable() {
         long StartupTime = System.currentTimeMillis();
@@ -38,6 +40,8 @@ public final class VoxelSMP extends JavaPlugin {
             pluginLogger.info("Initializing VoxelSMP config manager");
             ConfigManager configManager = new ConfigManager(this);
             pluginLogger.info("Initialized VoxelSMP config manager");
+            // DiscordSRV Integration
+            //TODO: DiscordSRV integration
             pluginLogger.info("Loading VoxelSMP commands");
             // Settings
             Settings settings = new Settings();

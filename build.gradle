@@ -14,6 +14,7 @@ repositories {
         name = "sonatype"
         url = "https://oss.sonatype.org/content/groups/public/"
     }
+    maven { url 'https://nexus.scarsz.me/content/groups/public/' }
 
     maven { url 'https://repo.codemc.io/repository/maven-releases/' }
     maven { url 'https://repo.destial.xyz/repository/maven-releases/'}
@@ -27,6 +28,7 @@ repositories {
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.3-R0.1-SNAPSHOT")
     compileOnly("net.labymod.serverapi:server-bukkit:1.0.4")
+    compileOnly('com.discordsrv:discordsrv:1.28.0')
 }
 
 def targetJavaVersion = 21
