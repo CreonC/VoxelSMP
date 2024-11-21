@@ -2,6 +2,7 @@ package me.creonc.voxelsmp;
 
 
 import me.creonc.voxelsmp.commands.*;
+import me.creonc.voxelsmp.config.ConfigManager;
 import me.creonc.voxelsmp.events.BanFeather;
 import me.creonc.voxelsmp.events.NoGriefDuringGP;
 import me.creonc.voxelsmp.features.Lifesteal;
@@ -27,22 +28,19 @@ public final class VoxelSMP extends JavaPlugin {
     long gracePeriodDuration = 0;
     public boolean gracePeriodActive = false;
 
-
-
     @Override
     public void onEnable() {
         long StartupTime = System.currentTimeMillis();
         Logger pluginLogger = getLogger();
         // Plugin startup logic
         pluginLogger.info("Starting VoxelSMP core");
-        getConfig().options().copyDefaults(true);
-        this.saveConfig();
-        Settings settings = new Settings();
-
-
         try {
+            pluginLogger.info("Initializing VoxelSMP config manager");
+            ConfigManager configManager = new ConfigManager(this);
+            pluginLogger.info("Initialized VoxelSMP config manager");
             pluginLogger.info("Loading VoxelSMP commands");
             // Settings
+            Settings settings = new Settings();
             this.getCommand("settings").setExecutor(settings);
 
             // Grace Period
