@@ -158,7 +158,7 @@ public class PurgeDay implements Listener {
             event.getPlayer().sendMessage("§c§lWARNING: The Purge is currently active!");
             event.getPlayer().sendMessage("§cLifesteal is enabled - Be careful!");
         } else {
-            event.getPlayer().sendMessage("§aThe server is peaceful. Next purge starts on " + purgeDay);
+            event.getPlayer().sendMessage("§aThe server is peaceful. Next purge starts on " + nextPurge);
         }
     }
 
