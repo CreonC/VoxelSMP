@@ -93,11 +93,6 @@ public final class VoxelSMP extends JavaPlugin {
             // PurgeDay
             getServer().getPluginManager().registerEvents(new PurgeDay(this, lifesteal), this);
 
-            // setPurgeDay (Command)
-            setPurgeDay setPurgeDay = new setPurgeDay(new PurgeDay(this, lifesteal));
-            PluginCommand setPurgeDayCommand = getCommand("setpurgeday");
-            setPurgeDayCommand.setExecutor(setPurgeDay);
-
             pluginLogger.info("VoxelSMP features loaded successfully");
             pluginLogger.info("VoxelSMP core started successfully in " + (System.currentTimeMillis() - StartupTime) + "ms");
         }

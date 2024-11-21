@@ -36,10 +36,6 @@ commands:
     usage: /worldcontrol
     permission: voxelsmp.admin
     permission-message: "You do not have permission to use this command"
-  setpurgeday:
-    description: Sets the day when the purge occurs
-    usage: /setpurgeday <day>
-    permission: voxelsmp.admin
 
 depend:
   - DiscordSRV
