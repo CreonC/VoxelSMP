@@ -28,7 +28,7 @@ public class Lifesteal implements Listener {
     public boolean isEnabled() {
         return enabled;
     }
-    //FIXME: Discord integrationa
+    //FIXME: Discord integration
     @EventHandler
     public void onPlayerDied(PlayerDeathEvent event) {
         if (!enabled) {
