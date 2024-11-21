@@ -1,5 +1,6 @@
 package me.creonc.voxelsmp.features;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
@@ -60,12 +61,14 @@ public class Lifesteal implements Listener {
             plugin.getLogger().info("[Lifesteal] Reducing " + player.getName() + "'s health from " +
                     (currentMax/2) + " hearts to " + (newMax/2) + " hearts");
 
-            attribute.setBaseValue(newMax);
-//player.setHealth(newMax); WHYYYYY
-
-            if (newMax <= MIN_HEALTH) {
+            // Only eliminate if the new health would be LESS than MIN_HEALTH
+            if (currentMax <= MIN_HEALTH) {
                 plugin.getLogger().info("[Lifesteal] Player " + player.getName() + " has been eliminated!");
                 Bukkit.broadcastMessage("§c" + player.getName() + " has been eliminated!");
+                player.kick(Component.text("You have been eliminated!"));
+                //TODO: Store ban data
+            } else {
+                attribute.setBaseValue(newMax);
             }
         }
     }
