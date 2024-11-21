@@ -25,12 +25,11 @@ public class WorldControl implements CommandExecutor, Listener {
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String label, String[] args) {
-        if (!(commandSender instanceof Player)) {
+        if (!(commandSender instanceof Player player)) {
             commandSender.sendMessage("Only players can use this command.");
             return true;
         }
         Bukkit.getLogger().info("Command executed by " + commandSender.getName() + " with args: " + String.join(" ", args));
-        Player player = (Player) commandSender;
 
         if (args.length < 1) {
             player.sendMessage(ChatColor.RED + "Usage: /worldcontrol <enablenether | disablenether | enableend | disableend>");

@@ -4,6 +4,7 @@ package me.creonc.voxelsmp;
 import me.creonc.voxelsmp.commands.*;
 import me.creonc.voxelsmp.events.BanFeather;
 import me.creonc.voxelsmp.events.NoGriefDuringGP;
+import me.creonc.voxelsmp.features.Lifesteal;
 import me.creonc.voxelsmp.tabcomplete.AutoComplete;
 import me.creonc.voxelsmp.tabcomplete.AutoCompleteNether;
 import org.bukkit.Bukkit;
@@ -61,7 +62,6 @@ public final class VoxelSMP extends JavaPlugin {
             PluginCommand worldControlCommand = getCommand("worldcontrol");
             worldControlCommand.setExecutor(worldControl);
 
-
             pluginLogger.info("VoxelSMP commands loaded successfully");
             pluginLogger.info("Loading VoxelSMP tab completions");
             AutoComplete tabCompleter = new AutoComplete();
@@ -79,6 +79,10 @@ public final class VoxelSMP extends JavaPlugin {
             //No grief
             getServer().getPluginManager().registerEvents(new NoGriefDuringGP(this), this);
             pluginLogger.info("VoxelSMP events loaded successfully");
+            pluginLogger.info("Loading VoxelSMP features");
+            // Lifesteal
+            getServer().getPluginManager().registerEvents(new Lifesteal(this), this);
+            pluginLogger.info("VoxelSMP features loaded successfully");
             pluginLogger.info("VoxelSMP core started successfully in " + (System.currentTimeMillis() - StartupTime) + "ms");
         }
         catch (NullPointerException e) {
