@@ -250,6 +250,7 @@ public class PurgeDay implements Listener {
         Bukkit.broadcastMessage("§a=========================");
         Bukkit.broadcastMessage("§2§lTHE PURGE HAS ENDED!");
         Bukkit.broadcastMessage("§aLifesteal is now disabled.");
+        Bukkit.broadcastMessage("§aYou get to live another day!");
         Bukkit.broadcastMessage("§aNext purge starts " + formatDateTime(nextPurgeStart));
         Bukkit.broadcastMessage("§a=========================");
 
