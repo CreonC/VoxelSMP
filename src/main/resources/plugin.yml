@@ -37,5 +37,3 @@ commands:
     permission: voxelsmp.admin
     permission-message: "You do not have permission to use this command"
 
-depend:
-  - DiscordSRV
