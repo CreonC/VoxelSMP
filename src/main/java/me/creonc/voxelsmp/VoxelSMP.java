@@ -62,7 +62,7 @@ public final class VoxelSMP extends JavaPlugin {
             // Settings
             Settings settings = new Settings(rolesManager);
             this.getCommand("settings").setExecutor(settings);
-
+            getServer().getPluginManager().registerEvents(settings, this); // Register the listener
             // Grace Period
             GracePeriodCommand command = new GracePeriodCommand(this);
             PluginCommand gpCommand = getCommand("graceperiod");

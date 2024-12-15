@@ -92,6 +92,7 @@ public class Settings implements CommandExecutor, Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         if (!event.getView().title().equals(invName)) {
+            Bukkit.getLogger().info("Clicked inventory with title " + event.getView().title());
             return;
         }
 
@@ -123,13 +124,15 @@ public class Settings implements CommandExecutor, Listener {
 
     @EventHandler
     public void onInventoryDrag(InventoryDragEvent event) {
-        // Get the top inventory (our settings menu)
         Inventory topInventory = event.getView().getTopInventory();
-        
-        // Check if any of the dragged slots are in our settings menu
+    
+        // Debugging: Print all dragged slots
+        Bukkit.getLogger().info("Dragged slots: " + event.getRawSlots());
+    
         for (int slot : event.getRawSlots()) {
+            Bukkit.getLogger().info("Slot: " + slot + " (Top Inventory Size: " + topInventory.getSize() + ")");
             if (slot < topInventory.getSize()) {
-                // Cancel if trying to drag into the settings menu
+                Bukkit.getLogger().info("Slot " + slot + " is in the top inventory. Cancelling drag.");
                 event.setCancelled(true);
                 return;
             }
