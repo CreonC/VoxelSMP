@@ -29,6 +29,7 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.3-R0.1-SNAPSHOT")
     compileOnly("net.labymod.serverapi:server-bukkit:1.0.4")
     compileOnly('com.discordsrv:discordsrv:1.28.0')
+    compileOnly("com.google.code.gson:gson:2.11.0")
 }
 
 def targetJavaVersion = 21
