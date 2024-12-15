@@ -4,3 +4,13 @@
 /build/classes/java/main/
 /server
 golem.exe
+.idea/compiler.xml
+.idea/gradle.xml
+.idea/jarRepositories.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/uiDesigner.xml
+.idea/vcs.xml
+.idea/modules/VoxelSMP.main.iml
+.idea
+.vscode

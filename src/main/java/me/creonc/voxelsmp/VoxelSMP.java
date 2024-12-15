@@ -1,8 +1,10 @@
 package me.creonc.voxelsmp;
 
 
+import github.scarsz.discordsrv.dependencies.jda.api.managers.Manager;
 import me.creonc.voxelsmp.commands.*;
 import me.creonc.voxelsmp.config.ConfigManager;
+import me.creonc.voxelsmp.config.RolesManager;
 import me.creonc.voxelsmp.events.BanFeather;
 import me.creonc.voxelsmp.events.JoinBetaMessage;
 import me.creonc.voxelsmp.events.NoGriefDuringGP;
@@ -10,6 +12,8 @@ import me.creonc.voxelsmp.features.Lifesteal;
 import me.creonc.voxelsmp.features.PurgeDay;
 import me.creonc.voxelsmp.tabcomplete.AutoComplete;
 import me.creonc.voxelsmp.tabcomplete.AutoCompleteNether;
+import me.creonc.voxelsmp.srvintegration.SrvOnPlayerJoined;
+
 import github.scarsz.discordsrv.DiscordSRV;
 import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
@@ -17,6 +21,7 @@ import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import me.creonc.voxelsmp.events.HandlePlayerHit;
 import org.bukkit.scheduler.BukkitTask;
@@ -43,11 +48,19 @@ public final class VoxelSMP extends JavaPlugin {
             pluginLogger.info("Initializing VoxelSMP config manager");
             ConfigManager configManager = new ConfigManager(this);
             pluginLogger.info("Initialized VoxelSMP config manager");
+            RolesManager rolesManager = new RolesManager(this);
+
             // DiscordSRV Integration
-            //TODO: DiscordSRV integration
+            if (getServer().getPluginManager().getPlugin("DiscordSRV") != null) {
+                pluginLogger.info("DiscordSRV found. Enabling DiscordSRV integration");
+                getServer().getPluginManager().registerEvents(new SrvOnPlayerJoined(rolesManager), this);
+            } else {
+                pluginLogger.warning("DiscordSRV not found. DiscordSRV integration disabled");
+            }
+
             pluginLogger.info("Loading VoxelSMP commands");
             // Settings
-            Settings settings = new Settings();
+            Settings settings = new Settings(rolesManager);
             this.getCommand("settings").setExecutor(settings);
 
             // Grace Period
