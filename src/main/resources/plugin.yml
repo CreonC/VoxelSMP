@@ -36,4 +36,9 @@ commands:
     usage: /worldcontrol
     permission: voxelsmp.admin
     permission-message: "You do not have permission to use this command"
+  doublexp:
+    description: doublexp toggler
+    usage: /doublexp
+    permission: voxelsmp.admin
+    permission-message: "You do not have permission to use this command"
 

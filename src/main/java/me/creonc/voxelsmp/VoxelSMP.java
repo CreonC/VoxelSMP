@@ -6,6 +6,7 @@ import me.creonc.voxelsmp.commands.*;
 import me.creonc.voxelsmp.config.ConfigManager;
 import me.creonc.voxelsmp.config.RolesManager;
 import me.creonc.voxelsmp.events.BanFeather;
+import me.creonc.voxelsmp.events.EXPListener;
 import me.creonc.voxelsmp.events.NoGriefDuringGP;
 import me.creonc.voxelsmp.features.Lifesteal;
 import me.creonc.voxelsmp.features.PurgeDay;
@@ -20,6 +21,7 @@ import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import me.creonc.voxelsmp.events.HandlePlayerHit;
@@ -35,6 +37,7 @@ public final class VoxelSMP extends JavaPlugin {
     long gracePeriodDuration = 0;
     public boolean gracePeriodActive = false;
     public Lifesteal lifesteal;
+    private boolean isDoubleEXPEnabled = false;
 
 
     @Override
@@ -78,6 +81,10 @@ public final class VoxelSMP extends JavaPlugin {
             WorldControl worldControl = new WorldControl(this);
             PluginCommand worldControlCommand = getCommand("worldcontrol");
             worldControlCommand.setExecutor(worldControl);
+            // DoubleXP
+            doubleEXP DoubleEXp = new doubleEXP(this);
+            PluginCommand doubleEXPCommand = getCommand("doublexp");
+            doubleEXPCommand.setExecutor(DoubleEXp);
 
             pluginLogger.info("VoxelSMP commands loaded successfully");
             pluginLogger.info("Loading VoxelSMP tab completions");
@@ -95,6 +102,8 @@ public final class VoxelSMP extends JavaPlugin {
             getServer().getPluginManager().registerEvents(new BanFeather(), this);
             //No grief
             getServer().getPluginManager().registerEvents(new NoGriefDuringGP(this), this);
+            // DoubleEXP Listener
+            getServer().getPluginManager().registerEvents(new EXPListener(this), this);
             pluginLogger.info("VoxelSMP events loaded successfully");
             pluginLogger.info("Loading VoxelSMP features");
             // Lifesteal
@@ -125,6 +134,14 @@ public final class VoxelSMP extends JavaPlugin {
         }
         Bukkit.getLogger().info("Stopping VoxelSMP core");
         saveConfig();
+    }
+
+    public boolean isDoubleEXPEnabled() {
+        return isDoubleEXPEnabled;
+    }
+
+    public void setDoubleEXPEnabled(boolean enabled) {
+        isDoubleEXPEnabled = enabled;
     }
 
     public void initGracePeriodBossBar() {
