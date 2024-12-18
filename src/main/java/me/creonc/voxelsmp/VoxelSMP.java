@@ -96,8 +96,6 @@ public final class VoxelSMP extends JavaPlugin {
             getServer().getPluginManager().registerEvents(new BanFeather(), this);
             //No grief
             getServer().getPluginManager().registerEvents(new NoGriefDuringGP(this), this);
-            // JoinBetaMessage
-            getServer().getPluginManager().registerEvents(new JoinBetaMessage(this), this);
             pluginLogger.info("VoxelSMP events loaded successfully");
             pluginLogger.info("Loading VoxelSMP features");
             // Lifesteal

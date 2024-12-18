@@ -35,7 +35,7 @@ public class SrvOnPlayerJoined implements Listener {
             event.getPlayer().sendMessage(
                     "Your account is not linked to a Discord account. It's recommended to link your account to a Discord account");
             event.getPlayer().sendMessage("to receive on-join notifications to protect your account.");
-            event.getPlayer().sendMessage("You can link your account to a Discord account by typing /link in the chat");
+            event.getPlayer().sendMessage("You can link your account to a Discord account by typing /discord link in the chat");
             return;
         }
 
@@ -54,7 +54,7 @@ public class SrvOnPlayerJoined implements Listener {
                             .addField("Name", event.getPlayer().getName(), false) // Player's name
                             .addField("IP Address", event.getPlayer().getAddress().getAddress().getHostAddress(), false) // Player's IP
                             .setTimestamp(Instant.now()) // Current timestamp
-                            .setFooter("VoxelSMP Login System", null); // Footer text (optional)
+                            .setFooter("VoxelSMP Login Notifier", null); // Footer text (optional)
 
                     // Send the embed message to the private channel
                     privateChannel.sendMessageEmbeds(embedBuilder.build()).queue(
