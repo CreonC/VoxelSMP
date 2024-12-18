@@ -72,7 +72,7 @@ public class PurgeDay implements Listener {
     }
 
     private void loadConfiguration() {
-        apiBaseUrl = config.getString("purge.api.baseUrl", "http://192.168.1.225:10198"); //Yes I love leaking my local IP
+        apiBaseUrl = config.getString("purge.api.baseUrl", "http://192.168.1.163:10198"); //Yes I love leaking my local IP
         apiStatusEndpoint = config.getString("purge.api.statusEndpoint", "/api/purge/status");
 
         if (!isValidUrl(apiBaseUrl)) {

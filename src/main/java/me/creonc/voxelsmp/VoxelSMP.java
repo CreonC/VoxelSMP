@@ -6,7 +6,6 @@ import me.creonc.voxelsmp.commands.*;
 import me.creonc.voxelsmp.config.ConfigManager;
 import me.creonc.voxelsmp.config.RolesManager;
 import me.creonc.voxelsmp.events.BanFeather;
-import me.creonc.voxelsmp.events.JoinBetaMessage;
 import me.creonc.voxelsmp.events.NoGriefDuringGP;
 import me.creonc.voxelsmp.features.Lifesteal;
 import me.creonc.voxelsmp.features.PurgeDay;
