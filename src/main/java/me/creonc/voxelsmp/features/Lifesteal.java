@@ -12,6 +12,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import me.creonc.voxelsmp.VoxelSMP;
 import github.scarsz.discordsrv.DiscordSRV;
 import github.scarsz.discordsrv.dependencies.jda.api.entities.TextChannel;
+//json very good
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -133,7 +134,7 @@ public class Lifesteal implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         if (bannedPlayers.contains(player.getName())) {
-            player.kick(Component.text("You have been eliminated from the game!"));
+            player.kick(Component.text("You have been eliminated from the server!"));
         }
     }
 
